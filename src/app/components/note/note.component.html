@@ -1,0 +1,64 @@
+<div class="container">
+  <mat-card appearance="outlined" class="card-layout">
+    <mat-card-header>
+      <mat-card-title> Todo List</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Add a new todo</mat-label>
+          <input
+            matInput
+            [(ngModel)]="newTodo"
+            placeholder="Enter your todo"
+            (keyup.enter)="addTodo()"
+          />
+          <button mat-icon-button matSuffix (click)="addTodo()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      <!-- ✅ Error message displayed here -->
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+      <div *ngIf="successMessage" class="success-message">
+        {{ successMessage }}
+      </div>
+
+      <!-- Todo List -->
+<div *ngFor="let todo of todos; let i = index" class="listing">
+  <mat-checkbox [checked]="todo.completed" (change)="toggleComplete(todo)">
+    <ng-container *ngIf="editingIndex === i; else displayText">
+      <input [(ngModel)]="editedText" />
+    </ng-container>
+    <ng-template #displayText>
+      <span [class.done]="todo.completed">{{ todo.text }}</span>
+    </ng-template>
+  </mat-checkbox>
+
+  <div>
+    <!-- Save & Cancel Buttons (in edit mode) -->
+    <ng-container *ngIf="editingIndex === i">
+      <button mat-icon-button color="primary" (click)="saveEdit(i)">
+        <mat-icon>check</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="cancelEdit()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </ng-container>
+
+    <!-- Edit & Delete Buttons (normal mode) -->
+    <ng-container *ngIf="editingIndex !== i">
+      <button mat-icon-button (click)="startEdit(i)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="deleteTodo(i)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </ng-container>
+  </div>
+</div>
+    </mat-card-content>
+  </mat-card>
+</div>

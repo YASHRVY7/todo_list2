@@ -1,0 +1,23 @@
+.theme-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--card-bg);
+  color: var(--text-color);
+  border: none;
+  border-radius: 24px;
+  padding: 8px 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background 0.3s, color 0.3s, box-shadow 0.2s;
+}
+.theme-toggle-btn:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.16);
+  background: var(--primary);
+  color: #fff;
+}
+.theme-toggle-btn .material-icons {
+  font-size: 22px;
+}
