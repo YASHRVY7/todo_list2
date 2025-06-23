@@ -7,7 +7,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ➕ Add Todo
+//  Add Todo
 app.post('/todos', async (req, res) => {
   const { text } = req.body;
   const result = await pool.query(
@@ -17,13 +17,13 @@ app.post('/todos', async (req, res) => {
   res.json(result.rows[0]);
 });
 
-// 📄 Get All Todos
+//  Get All Todos
 app.get('/todos', async (req, res) => {
   const result = await pool.query('SELECT * FROM todos ORDER BY id DESC');
   res.json(result.rows);
 });
 
-// ✅ Update Completion
+//  Update Completion
 app.put('/todos/:id', async (req, res) => {
   const { completed } = req.body;
   const { id } = req.params;
@@ -31,7 +31,7 @@ app.put('/todos/:id', async (req, res) => {
   res.sendStatus(204);
 });
 
-// ✏️ Edit Todo Text
+// Edit Todo Text
 app.put('/todos/edit/:id', async (req, res) => {
   const { text } = req.body;
   const { id } = req.params;
@@ -39,13 +39,13 @@ app.put('/todos/edit/:id', async (req, res) => {
   res.sendStatus(204);
 });
 
-// ❌ Delete Todo
+//  Delete Todo
 app.delete('/todos/:id', async (req, res) => {
   await pool.query('DELETE FROM todos WHERE id = $1', [req.params.id]);
   res.sendStatus(204);
 });
 
-// Server Start
+
 app.listen(process.env.PORT, () => {
   console.log(`✅ Server running at http://localhost:${process.env.PORT}`);
 });
