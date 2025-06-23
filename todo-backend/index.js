@@ -33,11 +33,6 @@ app.get('/todos', async (req, res) => {
   }
 });
 
-<<<<<<< HEAD
-// Update Completion
-=======
-//  Update Completion
->>>>>>> fa17f3e0dab1b62327b45308274d7d82e10ad8a8
 app.put('/todos/:id', async (req, res) => {
   try {
     const { completed } = req.body;
@@ -63,11 +58,6 @@ app.put('/todos/edit/:id', async (req, res) => {
   }
 });
 
-<<<<<<< HEAD
-// Delete Todo
-=======
-//  Delete Todo
->>>>>>> fa17f3e0dab1b62327b45308274d7d82e10ad8a8
 app.delete('/todos/:id', async (req, res) => {
   try {
     await pool.query('DELETE FROM todos WHERE id = $1', [req.params.id]);
