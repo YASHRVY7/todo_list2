@@ -2,6 +2,9 @@
 
 A fullstack Todo List app built with Angular (frontend) and Node.js/Express with PostgreSQL (backend).
 
+![image](https://github.com/user-attachments/assets/61b82879-1f2e-49e9-9611-2c31531701c3)
+
+
 ## Features
 
 - Add, edit, complete, and delete todos
