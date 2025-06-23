@@ -1,7 +1,9 @@
-<<<<<<< HEAD
 # Todo List Application
 
 A fullstack Todo List app built with Angular (frontend) and Node.js/Express with PostgreSQL (backend).
+
+![image](https://github.com/user-attachments/assets/61b82879-1f2e-49e9-9611-2c31531701c3)
+
 
 ## Features
 
@@ -138,9 +140,3 @@ Backend (`todo-backend/.env`):
 
 ---
 
-## License
-
-This project is licensed under the ISC License.
-=======
-
->>>>>>> fa17f3e0dab1b62327b45308274d7d82e10ad8a8
