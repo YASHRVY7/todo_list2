@@ -7,42 +7,67 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ➕ Add Todo
+//  Add Todo
 app.post('/todos', async (req, res) => {
-  const { text } = req.body;
-  const result = await pool.query(
-    'INSERT INTO todos (text) VALUES ($1) RETURNING *',
-    [text]
-  );
-  res.json(result.rows[0]);
+  try {
+    const { text } = req.body;
+    const result = await pool.query(
+      'INSERT INTO todos (text) VALUES ($1) RETURNING *',
+      [text]
+    );
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Something went wrong' });
+  }
 });
 
-// 📄 Get All Todos
+//  Get All Todos
 app.get('/todos', async (req, res) => {
-  const result = await pool.query('SELECT * FROM todos ORDER BY id DESC');
-  res.json(result.rows);
+  try {
+    const result = await pool.query('SELECT * FROM todos ORDER BY id DESC');
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Something went wrong' });
+  }
 });
 
-// ✅ Update Completion
+// Update Completion
 app.put('/todos/:id', async (req, res) => {
-  const { completed } = req.body;
-  const { id } = req.params;
-  await pool.query('UPDATE todos SET completed = $1 WHERE id = $2', [completed, id]);
-  res.sendStatus(204);
+  try {
+    const { completed } = req.body;
+    const { id } = req.params;
+    await pool.query('UPDATE todos SET completed = $1 WHERE id = $2', [completed, id]);
+    res.sendStatus(204);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Something went wrong' });
+  }
 });
 
-// ✏️ Edit Todo Text
+// Edit Todo Text
 app.put('/todos/edit/:id', async (req, res) => {
-  const { text } = req.body;
-  const { id } = req.params;
-  await pool.query('UPDATE todos SET text = $1 WHERE id = $2', [text, id]);
-  res.sendStatus(204);
+  try {
+    const { text } = req.body;
+    const { id } = req.params;
+    await pool.query('UPDATE todos SET text = $1 WHERE id = $2', [text, id]);
+    res.sendStatus(204);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Something went wrong' });
+  }
 });
 
-// ❌ Delete Todo
+// Delete Todo
 app.delete('/todos/:id', async (req, res) => {
-  await pool.query('DELETE FROM todos WHERE id = $1', [req.params.id]);
-  res.sendStatus(204);
+  try {
+    await pool.query('DELETE FROM todos WHERE id = $1', [req.params.id]);
+    res.sendStatus(204);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Something went wrong' });
+  }
 });
 
 // Server Start

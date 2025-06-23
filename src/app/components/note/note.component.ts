@@ -25,9 +25,8 @@ import { TodoService, Todo } from '../../services/todo.service';
   templateUrl: './note.component.html',
   styleUrl: './note.component.css',
 })
-
-export class NoteComponent implements OnInit{
-  newTodo:string='';
+export class NoteComponent implements OnInit {
+  newTodo: string = '';
   todos: Todo[] = [];
   errorMessage: string = '';
   successMessage: string = '';
@@ -35,63 +34,78 @@ export class NoteComponent implements OnInit{
   editingIndex: number | null = null;
   editedText: string = '';
 
-
   constructor(private todoService: TodoService) {}
 
   ngOnInit(): void {
     this.loadTodos();
-
   }
-  loadTodos(){
-    this.todoService.getTodo().subscribe((data)=>{
+  loadTodos() {
+    this.todoService.getTodo().subscribe((data) => {
       this.todos = data;
     });
   }
 
-  addTodo(){
-    if(!this.newTodo || this.newTodo.trim()===''){
-      this.errorMessage='Todo cannot be empty!';
-      this.successMessage='';
+  addTodo() {
+    if (!this.newTodo || this.newTodo.trim() === '') {
+      this.errorMessage = 'Todo cannot be empty!';
+      this.successMessage = '';
       return;
     }
-    this.todoService.addTodo({text:this.newTodo}).subscribe((todo)=>{
-      this.todos.unshift(todo);
-      this.newTodo='';
-      this.successMessage = 'Todo added successfully!';
-      setTimeout(() => (this.successMessage = ''), 2000);
+    this.todoService.addTodo({ text: this.newTodo }).subscribe({
+      next: (todo) => {
+        this.todos.unshift(todo);
+        this.newTodo = '';
+        this.successMessage = 'Todo added successfully!';
+        this.errorMessage = '';
+        setTimeout(() => (this.successMessage = ''), 2000);
+      },
+      error: () => {
+        this.errorMessage = 'Failed to add todo, please try again.';
+        this.successMessage = '';
+      },
     });
   }
-  deleteTodo(index:number){
-    const todo=this.todos[index];
-    this.todoService.deleteTodo(todo.id!).subscribe(()=>{
-      this.todos.splice(index,1);
-    })
+  deleteTodo(index: number) {
+    const todo = this.todos[index];
+    this.todoService.deleteTodo(todo.id!).subscribe({
+      next: () => {
+        this.todos.splice(index, 1);
+      },
+      error: () => {
+        this.errorMessage = 'Failed to delete todo, please try again.';
+      },
+    });
   }
 
-  startEdit(index:number){
-    this.editingIndex=index;
-    this.editedText=this.todos[index].text;
+  startEdit(index: number) {
+    this.editingIndex = index;
+    this.editedText = this.todos[index].text;
   }
 
-  saveEdit(index:number){
-    const todo=this.todos[index];
-    this.todoService.editTodo(todo.id!,this.editedText).subscribe(()=>{
-      todo.text=this.editedText;
+  saveEdit(index: number) {
+    const todo = this.todos[index];
+    this.todoService.editTodo(todo.id!, this.editedText).subscribe(() => {
+      todo.text = this.editedText;
       this.cancelEdit();
-    })
+    });
   }
-    cancelEdit() {
+  cancelEdit() {
     this.editingIndex = null;
     this.editedText = '';
   }
-    toggleComplete(todo: Todo) {
-    this.todoService.updateTodoCompletion(todo.id!, !todo.completed).subscribe(() => {
-      todo.completed = !todo.completed;
-    });
+  toggleComplete(todo: Todo) {
+    this.todoService
+      .updateTodoCompletion(todo.id!, !todo.completed)
+      .subscribe(() => {
+        todo.completed = !todo.completed;
+      });
   }
-
+  clearError() {
+    if (this.newTodo && this.newTodo.trim()) {
+      this.errorMessage = '';
+    }
+  }
 }
-
 
 // export class NoteComponent {
 //   newTodo: string = '';
@@ -101,7 +115,6 @@ export class NoteComponent implements OnInit{
 
 //   editingIndex:number|null=null;
 //   editedText:string='';
-
 
 //   addTodo() {
 //     if (!this.newTodo || this.newTodo.trim() === '') {

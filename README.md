@@ -1,59 +1,142 @@
-# Todo
+# Todo List Application
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.15.
+A fullstack Todo List app built with Angular (frontend) and Node.js/Express with PostgreSQL (backend).
 
-## Development server
+## Features
 
-To start a local development server, run:
+- Add, edit, complete, and delete todos
+- Persistent storage with PostgreSQL
+- RESTful API backend
+- Modern Angular frontend with theme toggle
 
-```bash
-ng serve
+---
+
+## Prerequisites
+
+- [Node.js](https://nodejs.org/) (v18+ recommended)
+- [npm](https://www.npmjs.com/)
+- [Angular CLI](https://angular.io/cli)
+- [PostgreSQL](https://www.postgresql.org/)
+
+---
+
+## Project Structure
+
+```
+todo/
+  ├── src/                # Angular frontend source
+  ├── todo-backend/       # Node.js/Express backend
+  ├── package.json        # Angular dependencies
+  └── README.md           # This file
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## Backend Setup (`todo-backend`)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+1. **Install dependencies:**
+   ```bash
+   cd todo-backend
+   npm install
+   ```
 
-```bash
-ng generate component component-name
-```
+2. **Configure environment variables:**
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+   Create a `.env` file in `todo-backend/` with:
+   ```
+   PORT=5000
+   DB_HOST=localhost
+   DB_USER=your_db_user
+   DB_PASSWORD=your_db_password
+   DB_NAME=your_db_name
+   DB_PORT=5432
+   ```
 
-```bash
-ng generate --help
-```
+3. **Set up the database:**
 
-## Building
+   Create a PostgreSQL database and a `todos` table:
+   ```sql
+   CREATE TABLE todos (
+     id SERIAL PRIMARY KEY,
+     text VARCHAR(255) NOT NULL,
+     completed BOOLEAN DEFAULT FALSE
+   );
+   ```
 
-To build the project run:
+4. **Start the backend server:**
+   ```bash
+   node index.js
+   ```
+   The backend will run on `http://localhost:5000` (or your specified `PORT`).
 
-```bash
-ng build
-```
+---
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Frontend Setup (Angular)
 
-## Running unit tests
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+2. **Start the Angular development server:**
+   ```bash
+   ng serve
+   ```
+   The frontend will run on `http://localhost:4200`.
 
-```bash
-ng test
-```
+3. **API Configuration:**
+   - Ensure the Angular app's API calls point to the backend (default: `http://localhost:5000`).
+   - If needed, update the API URL in your Angular service (e.g., `src/app/services/todo.service.ts`).
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+## Running the App
 
-```bash
-ng e2e
-```
+1. **Start the backend** (`todo-backend/index.js`)
+2. **Start the frontend** (`ng serve`)
+3. Open [http://localhost:4200](http://localhost:4200) in your browser.
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
+## Available Scripts
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### Backend
+
+- `npm install` — Install backend dependencies
+- `node index.js` — Start backend server
+
+### Frontend
+
+- `npm install` — Install frontend dependencies
+- `ng serve` — Start Angular dev server
+- `ng build` — Build Angular app for production
+- `ng test` — Run unit tests
+
+---
+
+## API Endpoints
+
+- `POST   /todos` — Add a new todo
+- `GET    /todos` — Get all todos
+- `PUT    /todos/:id` — Update completion status
+- `PUT    /todos/edit/:id` — Edit todo text
+- `DELETE /todos/:id` — Delete a todo
+
+---
+
+## Environment Variables
+
+Backend (`todo-backend/.env`):
+
+- `PORT` — Port for backend server
+- `DB_HOST` — PostgreSQL host
+- `DB_USER` — PostgreSQL user
+- `DB_PASSWORD` — PostgreSQL password
+- `DB_NAME` — PostgreSQL database name
+- `DB_PORT` — PostgreSQL port
+
+---
+
+## License
+
+This project is licensed under the ISC License.

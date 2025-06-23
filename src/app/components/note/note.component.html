@@ -12,13 +12,14 @@
             [(ngModel)]="newTodo"
             placeholder="Enter your todo"
             (keyup.enter)="addTodo()"
+            (input)="clearError()"
           />
           <button mat-icon-button matSuffix (click)="addTodo()">
             <mat-icon>add</mat-icon>
           </button>
         </mat-form-field>
       </div>
-      <!-- ✅ Error message displayed here -->
+      <!-- Error message displayed here -->
       <div *ngIf="errorMessage" class="error-message">
         {{ errorMessage }}
       </div>
