@@ -1,138 +1,190 @@
-# Todo List Application
-
-A fullstack Todo List app built with Angular (frontend) and Node.js/Express with PostgreSQL (backend).
-
-![image](https://github.com/user-attachments/assets/61b82879-1f2e-49e9-9611-2c31531701c3)
-
-
-## Features
-
-- Add, edit, complete, and delete todos
-- Persistent storage with PostgreSQL
-- RESTful API backend
-- Modern Angular frontend with theme toggle
+Here is your **cleaned-up and corrected README.md** file, customized for your PostgreSQL-based Todo List App with Angular + Node.js + Express:
 
 ---
 
-## Prerequisites
+# ✅ Todo List Application
 
-- [Node.js](https://nodejs.org/) (v18+ recommended)
-- [npm](https://www.npmjs.com/)
-- [Angular CLI](https://angular.io/cli)
-- [PostgreSQL](https://www.postgresql.org/)
+A modern **full-stack Todo List** app built with **Angular 19**, **Node.js**, **Express.js**, and **PostgreSQL**.
+
+![image](https://github.com/user-attachments/assets/b2cec3cb-6490-41b5-b0e0-2e7381430b29)
+
 
 ---
 
-## Project Structure
+## ✨ Features
+
+* Add, edit, complete, and delete tasks
+* Toggle task completion status
+* Real-time UI updates
+* Material Design (Angular Material)
+* RESTful API backend
+* Persistent storage using PostgreSQL
+* Dark/light theme toggle
+
+---
+
+## 📦 Tech Stack
+
+* **Frontend:** Angular 19 + Angular Material
+* **Backend:** Node.js + Express.js
+* **Database:** PostgreSQL
+* **Dev Tools:** TypeScript, ESLint, Prettier
+
+---
+
+## ✅ Prerequisites
+
+Make sure the following are installed:
+
+* **Node.js** (v18 or higher)
+* **npm** (v9 or higher)
+* **PostgreSQL** (with a database and table created)
+* **Angular CLI**
+
+---
+
+## 🗂️ Project Structure
 
 ```
 todo/
-  ├── src/                # Angular frontend source
-  ├── todo-backend/       # Node.js/Express backend
-  ├── package.json        # Angular dependencies
-  └── README.md           # This file
+├── src/                     # Angular frontend
+│   ├── app/                 # App components
+│   └── modules/             # Feature modules
+│       └── todo/            # Todo module
+│           ├── models/      # Interfaces/Models
+│           └── services/    # API communication
+├── todo-backend/            # Express backend
+│   ├── controllers/         # Controller functions
+│   ├── routes/              # API routes
+│   ├── services/            # DB service logic
+│   ├── config/              # DB config
+│   └── index.js             # Entry point
+└── public/                  # Static files
 ```
 
 ---
 
-## Backend Setup (`todo-backend`)
+## 🚀 Backend Setup (`todo-backend`)
 
-1. **Install dependencies:**
-   ```bash
-   cd todo-backend
-   npm install
-   ```
+### 1. Install dependencies:
 
-2. **Configure environment variables:**
+```bash
+cd todo-backend
+npm install
+```
 
-   Create a `.env` file in `todo-backend/` with:
-   ```
+---
+
+### 2. Configure environment variables:
+
+Create a `.env` file inside `todo-backend/`:
+
+```
 PORT=5000
-DATABASE_URL=postgresql://username:password@localhost:5432/yourdbname
-
-
-3. **Set up the database:**
-
-   Create a PostgreSQL database and a `todos` table:
-   ```sql
-   CREATE TABLE todos (
-     id SERIAL PRIMARY KEY,
-     text VARCHAR(255) NOT NULL,
-     completed BOOLEAN DEFAULT FALSE
-   );
-   ```
-
-4. **Start the backend server:**
-   ```bash
-   node index.js
-   ```
-   The backend will run on `http://localhost:5000` (or your specified `PORT`).
+DATABASE_URL=postgresql://your_user:your_password@localhost:5432/your_db_name
+```
 
 ---
 
-## Frontend Setup (Angular)
+### 3. Set up the PostgreSQL database:
 
-1. **Install dependencies:**
-   ```bash
-   npm install
-   ```
+Run the following SQL to create the required table:
 
-2. **Start the Angular development server:**
-   ```bash
-   ng serve
-   ```
-   The frontend will run on `http://localhost:4200`.
-
-3. **API Configuration:**
-   - Ensure the Angular app's API calls point to the backend (default: `http://localhost:5000`).
-   - If needed, update the API URL in your Angular service (e.g., `src/app/services/todo.service.ts`).
+```sql
+CREATE TABLE todos (
+  id SERIAL PRIMARY KEY,
+  text VARCHAR(255) NOT NULL,
+  completed BOOLEAN DEFAULT FALSE
+);
+```
 
 ---
 
-## Running the App
+### 4. Start the backend server:
 
-1. **Start the backend** (`todo-backend/index.js`)
-2. **Start the frontend** (`ng serve`)
-3. Open [http://localhost:4200](http://localhost:4200) in your browser.
+```bash
+node index.js
+```
+
+Your backend will run on [http://localhost:5000](http://localhost:5000)
 
 ---
 
-## Available Scripts
+## 💻 Frontend Setup (Angular)
+
+### 1. Install frontend dependencies:
+
+```bash
+npm install
+```
+
+### 2. Start Angular development server:
+
+```bash
+ng serve
+```
+
+The app will be running at: [http://localhost:4200](http://localhost:4200)
+
+---
+
+### 3. API Configuration:
+
+Make sure your Angular service file (e.g. `todo.service.ts`) points to the correct backend:
+
+```ts
+private apiUrl = 'http://localhost:5000/todos';
+```
+
+---
+
+## 🧪 API Endpoints
+
+| Method | Endpoint     | Description              |
+| ------ | ------------ | ------------------------ |
+| POST   | `/todos`     | Add a new todo           |
+| GET    | `/todos`     | Get all todos            |
+| PATCH  | `/todos/:id` | Toggle completion status |
+| PUT    | `/todos/:id` | Update todo text         |
+| DELETE | `/todos/:id` | Delete a todo            |
+
+---
+
+## 🛠 Available Scripts
 
 ### Backend
 
-- `npm install` — Install backend dependencies
-- `node index.js` — Start backend server
+* `npm install` – Install backend dependencies
+* `node index.js` – Start backend server
 
 ### Frontend
 
-- `npm install` — Install frontend dependencies
-- `ng serve` — Start Angular dev server
-- `ng build` — Build Angular app for production
-- `ng test` — Run unit tests
+* `npm install` – Install frontend dependencies
+* `ng serve` – Start development server
+* `ng build` – Build app for production
+* `ng test` – Run unit tests
 
 ---
 
-## API Endpoints
+## 🌐 Running the Full App
 
-- `POST   /todos` — Add a new todo
-- `GET    /todos` — Get all todos
-- `PUT    /todos/:id` — Update completion status
-- `PUT    /todos/edit/:id` — Edit todo text
-- `DELETE /todos/:id` — Delete a todo
+1. Start the backend:
 
----
+   ```bash
+   cd todo-backend
+   node index.js
+   ```
 
-## Environment Variables
+2. Start the frontend:
 
-Backend (`todo-backend/.env`):
+   ```bash
+   cd ../
+   ng serve
+   ```
 
-- `PORT` — Port for backend server
-- `DB_HOST` — PostgreSQL host
-- `DB_USER` — PostgreSQL user
-- `DB_PASSWORD` — PostgreSQL password
-- `DB_NAME` — PostgreSQL database name
-- `DB_PORT` — PostgreSQL port
+3. Visit: [http://localhost:4200](http://localhost:4200)
 
 ---
+
+
 
