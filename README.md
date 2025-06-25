@@ -47,13 +47,9 @@ todo/
 
    Create a `.env` file in `todo-backend/` with:
    ```
-   PORT=5000
-   DB_HOST=localhost
-   DB_USER=your_db_user
-   DB_PASSWORD=your_db_password
-   DB_NAME=your_db_name
-   DB_PORT=5432
-   ```
+PORT=5000
+DATABASE_URL=postgresql://username:password@localhost:5432/yourdbname
+
 
 3. **Set up the database:**
 
