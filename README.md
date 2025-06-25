@@ -1,12 +1,7 @@
-<<<<<<< HEAD
-Here is your **cleaned-up and corrected README.md** file, customized for your PostgreSQL-based Todo List App with Angular + Node.js + Express:
-=======
->>>>>>> 7a1e3b7ef19a805def36aba3790c0a60c2bc0082
 
 ---
 
 # ✅ Todo List Application
-<<<<<<< HEAD
 
 A modern **full-stack Todo List** app built with **Angular 19**, **Node.js**, **Express.js**, and **PostgreSQL**.
 =======
@@ -15,7 +10,6 @@ A modern **full-stack Todo List** app built with **Angular 19**, **Node.js**, **
 
 ![image](https://github.com/user-attachments/assets/b2cec3cb-6490-41b5-b0e0-2e7381430b29)
 
->>>>>>> 7a1e3b7ef19a805def36aba3790c0a60c2bc0082
 
 ---
 
