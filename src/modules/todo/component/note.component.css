@@ -1,61 +1,169 @@
 .container {
-    display: flex;
-    justify-content: center;
-    padding-top: 40px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px;
 }
+
+.main-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
 .card-layout {
-    width: 800px;
-    background: var(--card-bg) !important;
-    color: var(--text-color) !important;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 16px;
+  background: var(--card-bg);
+  color: var(--text-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-mat-form-field {
-    width: 100%;
+.add-todo-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
 }
 
-mat-card-header {
-    display: flex;
-    justify-content: center;
-    padding-bottom: 20px;
+.full-width {
+  flex: 1;
 }
 
-.listing {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.error-message {
-  color: var(--error);
-  font-size: 14px;
-  margin-top: 4px;
-  margin-bottom: 12px;
+.todo-header,
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-color);
 }
 
-.success-message {
-  color: var(--success) !important;
-  font-size: 14px;
-  margin-top: 4px;
-  margin-bottom: 12px;
+.todo-header {
+  font-weight: bold;
+  border-bottom: 2px solid var(--border-color);
+  margin-bottom: 10px;
 }
 
-input {
-  font-size: 14px;
-  padding: 4px;
-  border-radius: 4px;
-  border: 1px solid var(--input-border);
+.column-title {
+  flex: 1;
+  color: var(--text-secondary);
+}
+
+.todo-checkbox {
+  margin-right: 8px;
+}
+
+.todo-text {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 8px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.action-buttons button {
+  margin-left: 4px;
+}
+
+.edit-input {
+  width: 100%;
   background: var(--input-bg);
-  color: var(--text-color) !important;
-  transition: background 0.3s, color 0.3s;
-}
-
-.listing span {
-  color: var(--text-color) !important;
+  color: var(--text-color);
+  border: 1px solid var(--input-border);
+  padding: 8px;
+  border-radius: 4px;
 }
 
 .done {
   text-decoration: line-through;
-  color: gray !important;
-  font-style: italic;
+  color: var(--text-muted);
 }
 
+.error-message {
+  color: var(--error);
+  margin-top: 8px;
+  background: var(--error-bg);
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.success-message {
+  color: var(--success);
+  margin-top: 8px;
+  background: var(--success-bg);
+  padding: 8px;
+  border-radius: 4px;
+}
+
+/* Dark Mode Variables */
+:root {
+  --card-bg: #ffffff;
+  --text-color: #333333;
+  --text-secondary: #666666;
+  --text-muted: #999999;
+  --border-color: #e0e0e0;
+  --input-bg: #ffffff;
+  --input-border: #e0e0e0;
+  --error: #dc3545;
+  --error-bg: #f8d7da;
+  --success: #28a745;
+  --success-bg: #d4edda;
+}
+
+/* Dark Mode Styles */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --card-bg: #1a1a1a;
+    --text-color: #ffffff;
+    --text-secondary: #b3b3b3;
+    --text-muted: #666666;
+    --border-color: #333333;
+    --input-bg: #2a2a2a;
+    --input-border: #333333;
+    --error: #f5c6cb;
+    --error-bg: #342a2a;
+    --success: #66c2a5;
+    --success-bg: #2a342a;
+  }
+
+  mat-form-field {
+    background: var(--input-bg);
+  }
+
+  .mat-mdc-form-field-wrapper {
+    background: var(--input-bg);
+  }
+
+  .mat-mdc-form-field-flex {
+    background: var(--input-bg);
+  }
+
+  .mat-mdc-form-field-flex input {
+    color: var(--text-color);
+  }
+
+  .mat-mdc-checkbox-checked .mat-mdc-checkbox-background {
+    background-color: #4CAF50;
+  }
+
+  .mat-mdc-checkbox-checked .mat-mdc-checkbox-frame {
+    border-color: #4CAF50;
+  }
+
+  .mat-mdc-button {
+    color: var(--text-color);
+  }
+
+  .mat-mdc-button.mat-mdc-button-base.mat-mdc-button-base-primary {
+    background-color: #4CAF50;
+  }
+
+  .mat-mdc-button.mat-mdc-button-base.mat-mdc-button-base-warn {
+    background-color: #f44336;
+  }
+}

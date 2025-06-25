@@ -1,25 +1,26 @@
 <div class="container">
-  <mat-card appearance="outlined" class="card-layout">
-    <mat-card-header>
-      <mat-card-title> Todo List</mat-card-title>
-    </mat-card-header>
+  <h2 class="main-title">Todo List</h2>
+
+  <mat-card class="card-layout">
     <mat-card-content>
-      <div>
-        <mat-form-field appearance="outline">
-          <mat-label>Add a new todo</mat-label>
+      <!-- Add Todo Form -->
+      <form (ngSubmit)="addTodo()" class="add-todo-form">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>New Todo</mat-label>
           <input
             matInput
             [(ngModel)]="newTodo"
-            placeholder="Enter your todo"
-            (keyup.enter)="addTodo()"
+            name="todo"
+            placeholder="Enter a task"
             (input)="clearError()"
           />
-          <button mat-icon-button matSuffix (click)="addTodo()">
-            <mat-icon>add</mat-icon>
-          </button>
         </mat-form-field>
-      </div>
-      <!-- Error message displayed here -->
+        <button mat-raised-button color="primary" type="submit">
+          Add Todo
+        </button>
+      </form>
+
+      <!-- Feedback messages -->
       <div *ngIf="errorMessage" class="error-message">
         {{ errorMessage }}
       </div>
@@ -27,39 +28,60 @@
         {{ successMessage }}
       </div>
 
+      <!-- Todo List Heading -->
+      <div class="todo-header">
+        <span class="column-title">Task</span>
+      </div>
+
       <!-- Todo List -->
-<div *ngFor="let todo of todos; let i = index" class="listing">
-  <mat-checkbox [checked]="todo.completed" (change)="toggleComplete(todo)">
-    <ng-container *ngIf="editingIndex === i; else displayText">
-      <input [(ngModel)]="editedText" />
-    </ng-container>
-    <ng-template #displayText>
-      <span [class.done]="todo.completed">{{ todo.text }}</span>
-    </ng-template>
-  </mat-checkbox>
+      <div *ngFor="let todo of todos; let i = index" class="todo-item">
+        <!-- Todo Text or Edit Field -->
+        <div class="todo-text">
+          <mat-checkbox
+            class="todo-checkbox"
+            [checked]="todo.completed"
+            (change)="toggleComplete(todo)">
+          </mat-checkbox>
+          <ng-container *ngIf="editingIndex === i; else readOnlyText">
+            <input
+              [(ngModel)]="editedText"
+              class="edit-input"
+              placeholder="Edit todo"
+              (input)="clearError()"
+            />
+          </ng-container>
+          <ng-template #readOnlyText>
+            <span [class.done]="todo.completed">{{ todo.text }}</span>
+          </ng-template>
+        </div>
 
-  <div>
-    <!-- Save & Cancel Buttons (in edit mode) -->
-    <ng-container *ngIf="editingIndex === i">
-      <button mat-icon-button color="primary" (click)="saveEdit(i)">
-        <mat-icon>check</mat-icon>
-      </button>
-      <button mat-icon-button color="warn" (click)="cancelEdit()">
-        <mat-icon>close</mat-icon>
-      </button>
-    </ng-container>
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+          <!-- Save / Cancel -->
+          <ng-container *ngIf="editingIndex === i">
+            <button mat-button color="primary" (click)="saveEdit(i)">
+              Update
+            </button>
+            <button mat-button color="warn" (click)="cancelEdit()">
+              Cancel
+            </button>
+          </ng-container>
 
-    <!-- Edit & Delete Buttons (normal mode) -->
-    <ng-container *ngIf="editingIndex !== i">
-      <button mat-icon-button (click)="startEdit(i)">
-        <mat-icon>edit</mat-icon>
-      </button>
-      <button mat-icon-button color="warn" (click)="deleteTodo(todo.id)">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </ng-container>
-  </div>
-</div>
+          <!-- Edit / Delete -->
+          <ng-container *ngIf="editingIndex !== i">
+            <button mat-icon-button (click)="startEdit(i)" aria-label="Edit">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              color="warn"
+              (click)="deleteTodo(todo.id)"
+              aria-label="Delete">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </ng-container>
+        </div>
+      </div>
     </mat-card-content>
   </mat-card>
 </div>

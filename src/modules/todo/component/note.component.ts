@@ -103,6 +103,7 @@ export class NoteComponent implements OnInit {
   startEdit(index: number) {
     this.editingIndex = index;
     this.editedText = this.todos[index].text;
+    this.clearError();
   }
 
   saveEdit(index: number) {
@@ -119,6 +120,7 @@ export class NoteComponent implements OnInit {
         this.todos[index] = updatedTodo;
         this.cancelEdit();
         this.successMessage = 'Todo updated successfully!';
+        this.errorMessage = ''; 
         setTimeout(() => {
           this.successMessage = '';
         }, 3000);
@@ -134,6 +136,8 @@ export class NoteComponent implements OnInit {
   cancelEdit() {
     this.editingIndex = null;
     this.editedText = '';
+    this.clearError(); 
+    this.successMessage = ''; 
   }
 
   clearError() {
