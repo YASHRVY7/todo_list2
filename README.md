@@ -1,4 +1,3 @@
-Here is your **cleaned-up and corrected README.md** file, customized for your PostgreSQL-based Todo List App with Angular + Node.js + Express:
 
 ---
 
