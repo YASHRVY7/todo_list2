@@ -8,7 +8,7 @@ A modern **full-stack Todo List** app built with **Angular 19**, **Node.js**, **
 
 A modern **full-stack Todo List** app built with **Angular 19**, **Node.js**, **Express.js**, and **PostgreSQL**.
 
-![image](https://github.com/user-attachments/assets/b2cec3cb-6490-41b5-b0e0-2e7381430b29)
+![image](https://github.com/user-attachments/assets/01f65760-9295-4a3c-b693-a82729d58dfb)
 
 
 ---
